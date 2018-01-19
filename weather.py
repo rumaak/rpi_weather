@@ -1,3 +1,5 @@
+# coding=utf-8
+
 import pyowm
 
 owm = pyowm.OWM('bd494464200b3a800a37d4a20963fea2')  
@@ -20,9 +22,12 @@ sts = w.get_detailed_status()
 wnd = w.get_wind()['speed']
 prs = w.get_pressure()['press']
 
-print(f'Weather in {city}')
-print(f'{sts}')
-print(f'Temperature: {tmp}°C')
-print(f'Humidity: {hum}%')
-print(f'Wind: {wnd}m/s')
-print(f'Pressure: {prs}hPa')
+print('Weather in ' + city)
+print(sts)
+print('Temperature: '+ str(tmp) +'°C')
+print('Humidity: '+ str(hum) +'%')
+print('Wind: '+ str(wnd) +'m/s')
+print('Pressure: '+ str(prs) +'hPa')
+
+def getWeather():
+	return {"temp":tmp, "hum":hum, "sts":sts, "wnd":wnd, "prs":prs, "city":city}
