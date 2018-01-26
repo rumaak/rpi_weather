@@ -21,6 +21,7 @@ hum = w.get_humidity()
 sts = w.get_detailed_status()
 wnd = w.get_wind()['speed']
 prs = w.get_pressure()['press']
+icn = w.get_weather_icon_name()
 
 print('Weather in ' + city)
 print(sts)
@@ -29,5 +30,12 @@ print('Humidity: '+ str(hum) +'%')
 print('Wind: '+ str(wnd) +'m/s')
 print('Pressure: '+ str(prs) +'hPa')
 
+image_url = "http://openweathermap.org/img/w/" + icn + ".png"
+
+print(image_url)
+
 def getWeather():
 	return {"temp":tmp, "hum":hum, "sts":sts, "wnd":wnd, "prs":prs, "city":city}
+
+def getIcon():
+	return image_url

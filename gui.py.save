@@ -1,6 +1,6 @@
 # coding=utf-8
 
-from PIL import Image, ImageTk
+from PIL import Image
 import urllib, cStringIO
 import weather as w
 from Tkinter import Tk, Label, Button
@@ -10,15 +10,15 @@ class MyFirstGUI:
         self.master = master
 
 	master.config(cursor="none")
-	master.attributes("-fullscreen", True)
-	#master.minsize(width=400, height=240)
-    	#master.maxsize(width=400, height=240)
-	master.title("Weather")
-	master.configure(background='black')
+	#master.attributes("-fullscreen", True)
+	master.minsize(width=400, height=240)
+    	master.maxsize(width=400, height=240)
+	master.title("A simple GUI")
 
 	file = cStringIO.StringIO(urllib.urlopen(img).read())
 	img = Image.open(file)
-	img = ImageTk.PhotoImage(img)
+	photo = ImageTk.PhotoImage(imag
+	print(img)
 
        # self.label = Label(master, text="This is our first GUI!")
        # self.label.pack()
@@ -29,10 +29,10 @@ class MyFirstGUI:
        # self.close_button = Button(master, text="Close", command=master.quit)
        # self.close_button.pack()
 
-	self.label = Label(master, background="black", compound="top", image=img, font=("Times New Roman",12,"bold"),foreground="white",
+	self.label = Label(master, anchor="w", justify="left", 
 			   text="Weather in " + str(wthr["city"]) + "\n" + str(wthr["sts"]) + "\nTemperature: " + str(wthr["temp"]) + "°C\nHumidity: " + str(wthr["hum"]) + "% \nWind: " + str(wthr["wnd"]) + "m/s \nPressure: " + str(wthr["prs"]) + "hPa")
 
-	self.label.image = img
+	self.label = Label(master, image=img)	
 
 	self.label.pack()
 
