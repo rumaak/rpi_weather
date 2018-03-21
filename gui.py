@@ -3,11 +3,14 @@
 from PIL import Image, ImageTk
 import urllib2, cStringIO
 import weather as w
+import pyowm
+import googlemaps
 from Tkinter import Tk, Label, Button
 
 class GUI:
-    def __init__(self, master):
+    def __init__(self, master, wet):
         self.master = master
+        self.wet = wet
         self.wthr = None
         self.img = None
         self.tkImg = None
@@ -22,22 +25,27 @@ class GUI:
         self.label = Label(master)
         self.label.pack()
 
+        self.err_label = Label(master, background="black", foreground="white")
+        self.err_label.pack()
+
     def put_data(self):
         print("updated")
         try:
-          self.wthr = w.getWeather()
-          self.img = w.getIcon()
+          self.wthr = wet.getWeather()
+          self.img = wet.getIcon()
 
           file = cStringIO.StringIO(urllib2.urlopen(self.img).read())
           self.tkImg = Image.open(file)
           self.img = ImageTk.PhotoImage(self.tkImg)
 
           self.label.config(text=self.weatherInfo())
-    
-        except urllib2.URLError as e:
+          self.err_label.config(text="")
+
+        except (googlemaps.exceptions.TransportError, pyowm.exceptions.api_call_error.APICallError):
           if self.wthr:
             self.label.config(text=self.weatherInfo())
             self.img = ImageTk.PhotoImage(self.tkImg)
+            self.err_label.config(text="Connection interrupted, last updated: " + self.wthr["time"])
           else:
             self.img = Image.open("error.png")
             self.img = ImageTk.PhotoImage(self.img)
@@ -51,7 +59,8 @@ class GUI:
     def weatherInfo(self):
         return "Weather in " + str(self.wthr["city"]) + "\n" + str(self.wthr["sts"]) + "\nTemperature: " + str(self.wthr["temp"]) + "°C\nHumidity: " + str(self.wthr["hum"]) + "% \nWind: " + str(self.wthr["wnd"]) + "m/s \nPressure: " + str(self.wthr["prs"]) + "hPa"
 
+wet = w.Weather()
 root = Tk()
-my_gui = GUI(root)
+my_gui = GUI(root, wet)  
 my_gui.put_data() 
 root.mainloop()
