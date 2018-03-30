@@ -19,9 +19,9 @@ class GUI:
         self.succ_request = False
 
         master.config(cursor="none")
-        # master.attributes("-fullscreen", True)
-        master.minsize(width=400, height=240)
-        master.maxsize(width=400, height=240)
+        master.attributes("-fullscreen", True)
+        # master.minsize(width=400, height=240)
+        # master.maxsize(width=400, height=240)
         master.title("Weather")
         master.configure(background='white')
 
@@ -43,7 +43,7 @@ class GUI:
         self.bigPlace = Label(master, font=("Arial",12,"bold"), justify="left", anchor="sw", bg=self.today_color, fg=self.text_color)
         self.bigPlace.place(width=120, height=40, x=280, y=65)
 
-        self.smallPlace = Label(master, text="Písek, Czechia", font=("Arial",10), justify="left", anchor="nw", bg=self.today_color, fg=self.text_color)
+        self.smallPlace = Label(master, font=("Arial",10), justify="left", anchor="nw", bg=self.today_color, fg=self.text_color)
         self.smallPlace.place(width=120, height=60, x=280, y=100)
 
         self.horizontal_line = Label(master, bg=self.line_color)
@@ -103,16 +103,16 @@ class GUI:
 
         # Vertical lines
         self.vertical_line1 = Label(master, bg=self.line_color)
-        self.vertical_line1.place(width=1, height=120, x=80, y=155)
+        self.vertical_line1.place(width=1, height=85, x=80, y=155)
 
         self.vertical_line2 = Label(master, bg=self.line_color)
-        self.vertical_line2.place(width=1, height=120, x=160, y=155)
+        self.vertical_line2.place(width=1, height=85, x=160, y=155)
 
         self.vertical_line3 = Label(master, bg=self.line_color)
-        self.vertical_line3.place(width=1, height=120, x=240, y=155)
+        self.vertical_line3.place(width=1, height=85, x=240, y=155)
 
         self.vertical_line4 = Label(master, bg=self.line_color)
-        self.vertical_line4.place(width=1, height=120, x=320, y=155)
+        self.vertical_line4.place(width=1, height=85, x=320, y=155)
 
     def put_data(self):
         print("updated")
