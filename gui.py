@@ -44,7 +44,7 @@ class GUI:
         self.bigPlace.place(width=120, height=40, x=280, y=65)
 
         self.smallPlace = Label(master, font=("Arial",10), justify="left", anchor="nw", bg=self.today_color, fg=self.text_color)
-        self.smallPlace.place(width=120, height=60, x=280, y=100)
+        self.smallPlace.place(width=120, height=55, x=280, y=105)
 
         self.horizontal_line = Label(master, bg=self.line_color)
         self.horizontal_line.place(width=400, height=1, x=0, y=154)
